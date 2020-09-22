@@ -1,3 +1,5 @@
+const db = require('../database/models')
+
 exports.proyectosHome = (req, res)=> {
     res.render('index', {
         nombrePagina: 'Proyectos'
@@ -8,7 +10,7 @@ exports.formularioProyectos = (req, res)=>{
         nombrePagina: 'Nuevo Proyecto'
     })
 }
-exports.nuevoProyecto = (req, res) => {
+exports.nuevoProyecto = async (req, res) => {
     const {nombre} = req.body
 
     let errores = []
@@ -22,5 +24,11 @@ exports.nuevoProyecto = (req, res) => {
             nombrePagina: 'Nuevo Proyecto',
             errores
         })
+    } else{
+       const Proyecto= await db.Proyectos.create({
+            nombre: req.body.nombre
+        })
+        res.redirect('/')
+       
     }
 }

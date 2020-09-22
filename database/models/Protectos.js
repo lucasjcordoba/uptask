@@ -7,16 +7,19 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
       type: Sequelize.INTEGER(10)
     },
-    name: {
+    nombre: {
       type: Sequelize.STRING(500),
       allowNull:false
+    },
+    url: {
+      type: Sequelize.STRING(1000),
+      allowNull: true
     },
     
   }, {
     tablename: 'Proyectos',
     timestamps: true
   });
-
 
   return Proyectos;
 };
