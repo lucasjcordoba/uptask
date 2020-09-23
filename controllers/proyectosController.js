@@ -1,5 +1,5 @@
 const db = require('../database/models')
-
+const slug = require('slug')
 exports.proyectosHome = (req, res)=> {
     res.render('index', {
         nombrePagina: 'Proyectos'
@@ -25,9 +25,8 @@ exports.nuevoProyecto = async (req, res) => {
             errores
         })
     } else{
-       const Proyecto= await db.Proyectos.create({
-            nombre: req.body.nombre
-        })
+        
+       const Proyecto= await db.Proyectos.create({nombre})
         res.redirect('/')
        
     }

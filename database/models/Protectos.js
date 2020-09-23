@@ -1,4 +1,5 @@
-'use strict';
+const slug = require('slug')
+const shortId = require('shortid')
 module.exports = (sequelize, Sequelize) => {
   const Proyectos = sequelize.define('Proyectos', {
     id: {
@@ -16,6 +17,14 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: true
     },
     
+  },{
+    hooks:{
+      beforeCreate(proyecto){
+        const url = slug(proyecto.nombre).toLowerCase();
+
+        proyecto.url= `${url}-${shortId.generate()}`
+      }
+    }
   }, {
     tablename: 'Proyectos',
     timestamps: true
