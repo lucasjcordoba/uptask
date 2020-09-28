@@ -13,5 +13,14 @@ module.exports = function(){
         body('nombre').not().isEmpty().trim().escape(),
         proyectosController.nuevoProyecto
     );
+
+    //List
+
+    router.get('/proyectos/:url', proyectosController.proyectoUrl)
+
+
+    //Editar
+    router.get('/proyecto/editar/:id', proyectosController.formularioEditar)
+
     return router
 }
