@@ -9,7 +9,7 @@ module.exports = function(){
     );
     router.get('/nuevo-proyecto', proyectosController.formularioProyectos
     );
-    router.post('/nuevo-proyecto', 
+    router.post('/nuevo-proyecto/:id', 
         body('nombre').not().isEmpty().trim().escape(),
         proyectosController.nuevoProyecto
     );
