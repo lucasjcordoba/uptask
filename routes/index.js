@@ -9,7 +9,7 @@ module.exports = function(){
     );
     router.get('/nuevo-proyecto', proyectosController.formularioProyectos
     );
-    router.post('/nuevo-proyecto/:id', 
+    router.post('/nuevo-proyecto', 
         body('nombre').not().isEmpty().trim().escape(),
         proyectosController.nuevoProyecto
     );
@@ -21,6 +21,9 @@ module.exports = function(){
 
     //Editar
     router.get('/proyecto/editar/:id', proyectosController.formularioEditar)
+    router.post('/nuevo-proyecto/:id', 
+        body('nombre').not().isEmpty().trim().escape(),
+        proyectosController.actualizarProyecto)
 
     return router
 }
