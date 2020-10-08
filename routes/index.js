@@ -25,5 +25,10 @@ module.exports = function(){
         body('nombre').not().isEmpty().trim().escape(),
         proyectosController.actualizarProyecto)
 
+
+    // Eliminar
+    router.delete('/proyectos/:url', proyectosController.delete)
+    
+
     return router
 }
