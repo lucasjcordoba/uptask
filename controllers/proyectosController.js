@@ -1,7 +1,7 @@
 const db = require('../database/models')
 const slug = require('slug')
 exports.proyectosHome =  async (req, res)=> {
-    const proyectos = await db.Proyectos.findAll()
+    const proyectos = await db.Proyecto.findAll()
     res.render('index', {
         nombrePagina: 'Proyectos',
         proyectos
@@ -9,7 +9,7 @@ exports.proyectosHome =  async (req, res)=> {
   
 }
 exports.formularioProyectos = async(req, res)=>{
-    const proyectos = await db.Proyectos.findAll()
+    const proyectos = await db.Proyecto.findAll()
 
     res.render('nuevoProyecto',{
         nombrePagina: 'Nuevo Proyecto',
@@ -17,7 +17,7 @@ exports.formularioProyectos = async(req, res)=>{
     })
 }
 exports.nuevoProyecto = async (req, res) => {
-    const proyectos = await db.Proyectos.findAll()
+    const proyectos = await db.Proyecto.findAll()
 
     const {nombre} = req.body
 
@@ -35,7 +35,7 @@ exports.nuevoProyecto = async (req, res) => {
         })
     } else{
         
-       await db.Proyectos.create({nombre})
+       await db.Proyecto.create({nombre})
         res.redirect('/')
        
     }
@@ -43,9 +43,9 @@ exports.nuevoProyecto = async (req, res) => {
 
 exports.proyectoUrl= async(req, res, next)=> {
    
-    const proyectosPromise = db.Proyectos.findAll()
+    const proyectosPromise = db.Proyecto.findAll()
 
-    const proyectoPromise = db.Proyectos.findOne({
+    const proyectoPromise = db.Proyecto.findOne({
         where : {
             url: req.params.url
         }
@@ -65,9 +65,9 @@ exports.proyectoUrl= async(req, res, next)=> {
 
 exports.formularioEditar = async (req, res)=>{
 
-    const proyectosPromise = db.Proyectos.findAll()
+    const proyectosPromise = db.Proyecto.findAll()
 
-    const proyectoPromise = db.Proyectos.findOne({
+    const proyectoPromise = db.Proyecto.findOne({
         where : {
             id: req.params.id
         }
@@ -83,7 +83,7 @@ exports.formularioEditar = async (req, res)=>{
 }
 
 exports.actualizarProyecto = async (req, res) => {
-    const proyectos = await db.Proyectos.findAll()
+    const proyectos = await db.Proyecto.findAll()
 
     const {nombre} = req.body
 
@@ -101,7 +101,7 @@ exports.actualizarProyecto = async (req, res) => {
         })
     } else{
         
-        await db.Proyectos.update({
+        await db.Proyecto.update({
             nombre: nombre},{
                 where: {
                     id: req.params.id
@@ -117,7 +117,7 @@ exports.delete = async (req, res, next) => {
 
     const {urlProyecto} = req.query;
 
-    const resultado = await db.Proyectos.destroy(
+    const resultado = await db.Proyecto.destroy(
         {where: {
             url: urlProyecto
         }}

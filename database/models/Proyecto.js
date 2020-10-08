@@ -1,7 +1,7 @@
 const slug = require('slug')
 const shortId = require('shortid')
 module.exports = (sequelize, Sequelize) => {
-  const Proyectos = sequelize.define('Proyectos', {
+  const Proyecto = sequelize.define('Proyecto', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -30,5 +30,15 @@ module.exports = (sequelize, Sequelize) => {
     timestamps: true
   });
 
-  return Proyectos;
+  Proyecto.associate = function(models) {
+
+    Proyecto.hasMany(models.Tarea, {
+      as: 'proyecto',
+      foreignKey: 'proyecto_id'
+    });
+   
+
+  }
+
+  return Proyecto;
 };
